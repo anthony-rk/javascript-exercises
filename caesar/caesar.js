@@ -7,10 +7,9 @@ const checkIsAlpha = function(character) {
 }
 
 const shiftFn = function(char, num) {
-    // need to check if it goes out of bounds of a-z or A-Z, and loop it back
-    // to the beginning
     let asciiCode = char.charCodeAt(0);
     let newCode = 0;
+    
     // case if is lowercase
     if (asciiCode > 96 && asciiCode < 123) {
         newCode = asciiCode + num;
@@ -28,8 +27,7 @@ const shiftFn = function(char, num) {
         } else if (newCode < 65) {
             newCode += 26;
         }
-    }
-    
+    } 
     return String.fromCharCode(newCode); // convert back to alpha
 }
 
@@ -40,14 +38,12 @@ const caesar = function(input, numShift) {
     if (numShift < -26) {
         numShift %= 26;
     }
-
     let inputArray = input.split('');
     let resultArray = [];
 
     inputArray.forEach(element => {
         if (checkIsAlpha(element) == true) {
             resultArray.push(shiftFn(element, numShift));
-            // console.log(element);
         } else {
             resultArray.push(element);
         }
@@ -55,11 +51,5 @@ const caesar = function(input, numShift) {
 
     return resultArray.join('');
 }
-
-let output = caesar("z Z z Z!", -27);
-let output2 = caesar('Mjqqt, Btwqi!', -5)
-
-console.log(output);
-console.log(output2);
 
 module.exports = caesar
